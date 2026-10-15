@@ -1,10 +1,8 @@
--- Professional Lizard/Dhan ESP Radar Script for Roblox
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local CoreGui = game:GetService("CoreGui")
 local LocalPlayer = Players.LocalPlayer
 
--- Clean up any existing UI instances to avoid duplicates
 pcall(function()
     if CoreGui:FindFirstChild("DhanProRadar") then
         CoreGui.DhanProRadar:Destroy()
@@ -37,13 +35,10 @@ TitleLabel.TextScaled = true
 TitleLabel.Font = Enum.Font.SourceSansBold
 TitleLabel.Parent = MainFrame
 
--- Deep recursive scanning function to search inside map folders
 local function scanFolder(parentObj)
     for _, obj in ipairs(parentObj:GetChildren()) do
         pcall(function()
             local name = string.lower(obj.Name)
-            
-            -- Targeted keywords for matching target models/parts
             if name:find("ضب") or name:find("lizard") or name:find("dhan") or name:find("dab") or name:find("rish") then
                 local character = LocalPlayer.Character
                 local rootPart = character and character:FindFirstChild("HumanoidRootPart")
@@ -77,7 +72,6 @@ local function scanFolder(parentObj)
                 end
             end
             
-            -- Recurse through sub-folders/models
             if #obj:GetChildren() > 0 and not obj:IsA("Player") then
                 scanFolder(obj)
             end
